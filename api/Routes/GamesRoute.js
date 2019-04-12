@@ -10,13 +10,13 @@ const route = express.Router();
 route.use(helmet());
 route.use(express.json());
 
-route.post('', async (req, res) => {
+route.post('/', async (req, res) => {
     try {
         game = await db('Games').insert(req.body);
         if (game) {
-            res.json(200).json(game);
+            res.status(200).json(game);
         } else {
-            res.json(404).json({ message: 'The game already exists' })
+            res.status(405).json({ message: 'The game already exists' })
         }
     } catch (err) {
         res.status(500).json(err);
