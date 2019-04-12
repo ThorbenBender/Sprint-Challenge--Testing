@@ -4,9 +4,6 @@ const GameRoute = require('./Routes/GamesRoute');
 
 const server = express();
 
-// server.use(helmet());
-
-server.use(express.json());
 
 server.use('/games', GameRoute);
 

@@ -1,10 +1,14 @@
 const express = require('express');
 const knex = require('knex');
 const knexConfig = require('../../knexfile').development;
+const helmet = require('helmet');
 
 const db = knex(knexConfig);
 
 const route = express.Router();
+
+route.use(helmet());
+route.use(express.json());
 
 route.post('', async (req, res) => {
     try {
@@ -15,7 +19,7 @@ route.post('', async (req, res) => {
             res.json(404).json({ message: 'The game already exists' })
         }
     } catch (err) {
-        res.status(500).json({ error: err });
+        res.status(500).json(err);
     }
 })
 
